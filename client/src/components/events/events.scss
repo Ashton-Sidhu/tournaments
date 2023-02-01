@@ -1,0 +1,24 @@
+.events-home {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.events-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.event-card {
+    width: 30%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.event-date,
+.event-location {
+    font-size: 0.8em;
+    color: gray;
+}
