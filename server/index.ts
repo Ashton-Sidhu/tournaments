@@ -12,9 +12,9 @@ app.use(express.json());
 app.use(cors());
 
 const events = [
-    { id: 1, name: "Event 1", date: "01/01/2024", location: "New York" },
-    { id: 2, name: "Event 2", date: "02/01/2024", location: "Los Angeles" },
-    { id: 3, name: "Event 3", date: "03/01/2024", location: "Chicago" }
+    { id: 1, name: "Event 1", date: "01/01/2024", time: "5:00PM", location: "New York" },
+    { id: 2, name: "Event 2", date: "02/01/2024", time: "5:00PM", location: "Los Angeles" },
+    { id: 3, name: "Event 4", date: "03/01/2024", time: "5:00PM", location: "Chicago" }
 ];
 
 app.get("/api/events", (req: Request, res: Response) => {

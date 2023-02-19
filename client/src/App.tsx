@@ -2,13 +2,16 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import EventsHome from './components/events/events';
+import Header from './components/header/header';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <EventsHome />
-      </header>
+      <Header
+        onEventsClick={() => console.log('Events clicked')}
+        onAboutClick={() => console.log('About clicked')}
+      />
+      <EventsHome />
     </div>
   );
 }
