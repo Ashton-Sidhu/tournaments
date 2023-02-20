@@ -1,5 +1,3 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import EventsHome from './components/events/events';
 import Header from './components/header/header';

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./events.scss";
+import { Button, Card, Row, Col } from 'antd';
 
 interface Event {
     id: string;
@@ -8,6 +9,7 @@ interface Event {
     location: string;
     description: string;
     time: string;
+    link: string;
 }
 
 const Events: React.FC = () => {
@@ -24,15 +26,13 @@ const Events: React.FC = () => {
 
     return (
         <div className="events">
-            <h1>Upcoming Events</h1>
-            <div className="events-list">
+            <Card title="Upcoming Events">
                 {upcomingEvents.map(event => (
-                    <div key={event.id} className="event-card" onClick={() => setSelectedEvent(event)}>
-                        <h2>{event.name}</h2>
-                        <div className="event-date">{event.date}</div>
-                    </div>
+                    <Card type="inner" title={event.name} className="event-card" bordered={false} extra={<Button type="primary" href={event.link}>Register</Button>} >
+                        <p>{event.date}</p>
+                    </Card>
                 ))}
-            </div>
+            </Card>
             {selectedEvent && (
                 <div className="event-details-modal">
                     <div className="event-details">
@@ -41,8 +41,8 @@ const Events: React.FC = () => {
                         <div className="event-time">Time: {selectedEvent.time}</div>
                         <div className="event-location">Location: {selectedEvent.location}</div>
                         <div className="event-description">Description: {selectedEvent.description}</div>
-                        <button className="register-button">Register</button>
-                        <button onClick={() => setSelectedEvent(null)}>Close</button>
+                        <Button type="primary">Register</Button>
+                        <Button onClick={() => setSelectedEvent(null)}>Close</Button>
                     </div>
                 </div>
             )}

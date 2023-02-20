@@ -1,25 +1,17 @@
 .events {
 
-    h1 {
-        text-align: center;
-        margin-bottom: 2rem;
-    }
-
-    .events-list {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
     .event-card {
-        width: 300px;
-        height: 200px;
-        background-color: #759FBC;
-        margin: 1rem;
-        cursor: pointer;
-        text-align: center;
+        // width: 300px;
+        // justify-content: center;
+        // height: 200px;
+        // background-color: #759FBC;
+        // margin-left: 19%;
+
+        margin-top: 16;
+        // cursor: pointer;
+        // text-align: center;
         padding: 1rem;
-        border-radius: 10px;
+        // border-radius: 10px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 
         h2 {
