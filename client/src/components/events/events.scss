@@ -1,88 +1,9 @@
 .events {
-
     .event-card {
-        // width: 300px;
-        // justify-content: center;
-        // height: 200px;
-        // background-color: #759FBC;
-        // margin-left: 19%;
-
         margin-top: 16;
-        // cursor: pointer;
-        // text-align: center;
+        margin-bottom: 1.5rem;
         padding: 1rem;
-        // border-radius: 10px;
+        border-radius: 10px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-
-        h2 {
-            margin-bottom: 1rem;
-        }
-
-        .event-date {
-            font-size: 0.8rem;
-            color: gray;
-        }
-    }
-
-    .event-details-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .event-details {
-            background-color: #ffffff;
-            width: 600px;
-            height: 300px;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-
-            h1 {
-                margin-bottom: 2rem;
-            }
-
-            .event-date {
-                margin-bottom: 1rem;
-            }
-
-            .event-time {
-                margin-bottom: 1rem;
-            }
-
-            .event-location {
-                margin-bottom: 1rem;
-            }
-
-            .event-description {
-                margin-bottom: 2rem;
-            }
-
-            .register-button {
-                background-color: #4CAF50;
-                color: white;
-                padding: 0.5rem 1rem;
-                border-radius: 5px;
-                border: none;
-                cursor: pointer;
-                float: right;
-            }
-
-            button {
-                background-color: gray;
-                color: white;
-                padding: 0.5rem 1rem;
-                border-radius: 5px;
-                border: none;
-                cursor: pointer;
-                float: right;
-                margin-right: 1rem;
-            }
-        }
     }
 }

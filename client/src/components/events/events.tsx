@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./events.scss";
-import { Button, Card, Row, Col } from 'antd';
+import { Button, Card, Descriptions } from 'antd';
 
 interface Event {
     id: string;
@@ -13,7 +13,6 @@ interface Event {
 }
 
 const Events: React.FC = () => {
-    const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
     const [events, setEvents] = useState<Event[]>([]);
 
     useEffect(() => {
@@ -29,23 +28,19 @@ const Events: React.FC = () => {
             <Card title="Upcoming Events">
                 {upcomingEvents.map(event => (
                     <Card type="inner" title={event.name} className="event-card" bordered={false} extra={<Button type="primary" href={event.link}>Register</Button>} >
-                        <p>{event.date}</p>
+                        <Descriptions
+                            title="Details"
+                            bordered
+                            column={{ xxl: 1, xl: 1, lg: 1, md: 1, sm: 1, xs: 1 }}
+                        >
+                            <Descriptions.Item label="Date">{event.date}</Descriptions.Item>
+                            <Descriptions.Item label="Time">{event.time}</Descriptions.Item>
+                            <Descriptions.Item label="Location">{event.location}</Descriptions.Item>
+                            <Descriptions.Item label="Description">{event.description}</Descriptions.Item>
+                        </Descriptions>
                     </Card>
                 ))}
             </Card>
-            {selectedEvent && (
-                <div className="event-details-modal">
-                    <div className="event-details">
-                        <h1>{selectedEvent.name}</h1>
-                        <div className="event-date">Date: {selectedEvent.date}</div>
-                        <div className="event-time">Time: {selectedEvent.time}</div>
-                        <div className="event-location">Location: {selectedEvent.location}</div>
-                        <div className="event-description">Description: {selectedEvent.description}</div>
-                        <Button type="primary">Register</Button>
-                        <Button onClick={() => setSelectedEvent(null)}>Close</Button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
