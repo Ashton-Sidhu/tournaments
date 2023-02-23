@@ -14,7 +14,7 @@ spec:
         app: sports
     spec:
       containers:
-        - image: docker.io/bigsidhu/sports-client:820bf7f9d7a5a32c16971218357128ad060aa380
+        - image: docker.io/bigsidhu/sports-client:b79907283ceb42695ac4f05dd83bd5357c621062
           name: sports-client
           imagePullPolicy: Always
           livenessProbe:
@@ -33,7 +33,7 @@ spec:
             - name: config-volume
               mountPath: /etc/nginx/nginx.conf
               subPath: nginx.conf
-        - image: docker.io/bigsidhu/sports-api:820bf7f9d7a5a32c16971218357128ad060aa380
+        - image: docker.io/bigsidhu/sports-api:b79907283ceb42695ac4f05dd83bd5357c621062
           name: sports-api
           imagePullPolicy: Always
           ports:
