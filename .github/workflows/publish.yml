@@ -48,7 +48,7 @@ jobs:
         id: build-and-push-client
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: .
+          context: client
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-client:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
@@ -62,7 +62,7 @@ jobs:
         id: build-and-push-api
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: .
+          context: server
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-api:${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
           push: true
