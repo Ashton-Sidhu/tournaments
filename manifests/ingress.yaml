@@ -10,7 +10,7 @@ spec:
       paths:
       - backend:
           service:
-            name: sports-client
+            name: sports
             port:
               number: 80
         pathType: ImplementationSpecific
