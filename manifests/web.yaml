@@ -14,7 +14,7 @@ spec:
         app: sports
     spec:
       containers:
-        - image: docker.io/bigsidhu/sports-client:e2fe036d79dac7ccbd8872d21d5c754c76de2635
+        - image: docker.io/bigsidhu/sports-client:c677df8fcd81981bf7069b11d01fb12c9b5a9780
           name: sports-client
           imagePullPolicy: Always
           livenessProbe:
@@ -30,10 +30,10 @@ spec:
             - containerPort: 80
               name: 80tcpport
           volumeMounts:
-          - name: config-volume
-            mountPath: /etc/nginx/nginx.conf
-            subPath: nginx.conf
-        - image: docker.io/bigsidhu/sports-api:e2fe036d79dac7ccbd8872d21d5c754c76de2635
+            - name: config-volume
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+        - image: docker.io/bigsidhu/sports-api:c677df8fcd81981bf7069b11d01fb12c9b5a9780
           name: sports-api
           imagePullPolicy: Always
           ports:
@@ -52,28 +52,13 @@ metadata:
   name: sports-nginx-config
   namespace: default
 data:
-  nginx.conf: |
-    events {
-      worker_connections 1024;
-    }
-
-    http{
-      server {
-        listen 80;
-        root  /usr/share/nginx/html;
-        include /etc/nginx/mime.types;
-
-        location /api {
-          proxy_pass         http://sports-api:8000/api;
-          proxy_redirect     off;
-          proxy_set_header   Host $host;
-          proxy_set_header   X-Real-IP $remote_addr;
-          proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_set_header   X-Forwarded-Host $server_name;
-        }
-      
-      }
-    }
+  nginx.conf: "events {\n  worker_connections 1024;\n}\n\nhttp{\n  server {\n    listen 80;\n    root  /usr/share/nginx/html;\n    include /etc/nginx/mime.types;\n\n    location /api {\n      proxy_pass         http://sports-api:8000/api;\n      proxy_redirect     off;\n      proxy_set_header   Host $host;\n      proxy_set_header   X-Real-IP $remote_addr;\n      proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;\n      proxy_set_header   X-Forwarded-Host $server_name;\n    }\n  \n  }\n}\n"
+spec:
+  template:
+    spec:
+      containers:
+        - image: docker.io/bigsidhu/sports-client:c677df8fcd81981bf7069b11d01fb12c9b5a9780
+        - image: docker.io/bigsidhu/sports-api:c677df8fcd81981bf7069b11d01fb12c9b5a9780
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -82,22 +67,27 @@ metadata:
   namespace: default
 spec:
   rules:
-  - host: sports.sidhulabs.ca
-    http:
-      paths:
-      - backend:
-          service:
-            name: sports-client
-            port:
-              number: 80
-        pathType: ImplementationSpecific
+    - host: sports.sidhulabs.ca
+      http:
+        paths:
+          - backend:
+              service:
+                name: sports-client
+                port:
+                  number: 80
+            pathType: ImplementationSpecific
+  template:
+    spec:
+      containers:
+        - image: docker.io/bigsidhu/sports-client:c677df8fcd81981bf7069b11d01fb12c9b5a9780
+        - image: docker.io/bigsidhu/sports-api:c677df8fcd81981bf7069b11d01fb12c9b5a9780
 status:
   loadBalancer:
     ingress:
-    - ip: 10.10.1.51
-    - ip: 10.10.1.52
-    - ip: 10.10.1.53
-    - ip: 10.10.1.54
+      - ip: 10.10.1.51
+      - ip: 10.10.1.52
+      - ip: 10.10.1.53
+      - ip: 10.10.1.54
 ---
 apiVersion: v1
 kind: Service
@@ -111,3 +101,8 @@ spec:
       name: tcpport80
   selector:
     app: sports
+  template:
+    spec:
+      containers:
+        - image: docker.io/bigsidhu/sports-client:c677df8fcd81981bf7069b11d01fb12c9b5a9780
+        - image: docker.io/bigsidhu/sports-api:c677df8fcd81981bf7069b11d01fb12c9b5a9780
