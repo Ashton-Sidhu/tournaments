@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sports
+  namespace: default
+spec:
+  rules:
+  - host: sports.sidhulabs.ca
+    http:
+      paths:
+      - backend:
+          service:
+            name: sports-client
+            port:
+              number: 80
+        pathType: ImplementationSpecific
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.10.1.51
+    - ip: 10.10.1.52
+    - ip: 10.10.1.53
+    - ip: 10.10.1.54
