@@ -70,7 +70,7 @@ jobs:
       - name: Update container version
         uses: mikefarah/yq@master
         with:
-          cmd: yq -i '.spec.template.spec.containers[1].image = "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-client:${{ github.sha }}"' './manifests/web.yaml'
+          cmd: yq -i '.spec.template.spec.containers[1].image = "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-api:${{ github.sha }}"' './manifests/web.yaml'
 
       - name: Commit and Push manifests
         run: |
