@@ -16,7 +16,7 @@ data:
         include /etc/nginx/mime.types;
 
         location /api {
-          proxy_pass         http://sports-api:8000/api;
+          proxy_pass         http://localhost:8000/api;
           proxy_redirect     off;
           proxy_set_header   Host $host;
           proxy_set_header   X-Real-IP $remote_addr;
