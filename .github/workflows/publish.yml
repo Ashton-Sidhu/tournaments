@@ -76,6 +76,6 @@ jobs:
         run: |
           git config --global user.name "Github Action"
           git config --global user.email "github@action.com"
-          git add manifests/.yaml
+          git add manifests/web.yaml
           git commit -m "GH ACTION: Update Kube manifest."
           git push

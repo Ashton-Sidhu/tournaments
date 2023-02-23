@@ -29,14 +29,51 @@ spec:
           ports:
             - containerPort: 80
               name: 80tcpport
+          volumeMounts:
+          - name: config-volume
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
         - image: docker.io/bigsidhu/sports-api:e2fe036d79dac7ccbd8872d21d5c754c76de2635
           name: sports-api
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
               name: 8000tcpport
+      volumes:
+        - name: config-volume
+          configMap:
+            name: sports-nginx-config
       restartPolicy: Always
       dnsPolicy: Default
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sports-nginx-config
+  namespace: default
+data:
+  nginx.conf: |
+    events {
+      worker_connections 1024;
+    }
+
+    http{
+      server {
+        listen 80;
+        root  /usr/share/nginx/html;
+        include /etc/nginx/mime.types;
+
+        location /api {
+          proxy_pass         http://sports-api:8000/api;
+          proxy_redirect     off;
+          proxy_set_header   Host $host;
+          proxy_set_header   X-Real-IP $remote_addr;
+          proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header   X-Forwarded-Host $server_name;
+        }
+      
+      }
+    }
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
