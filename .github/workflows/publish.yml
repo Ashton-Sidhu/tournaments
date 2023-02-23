@@ -58,14 +58,14 @@ jobs:
         with:
           cmd: yq -i '.spec.template.spec.containers[0].image = "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-client:${{ github.sha }}"' './manifests/web.yaml'
 
-     - name: Build and push API Docker image
-        id: build-and-push
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        with:
-          context: .
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-api:${{ github.sha }}
-          labels: ${{ steps.meta.outputs.labels }}
-          push: true
+      - name: Build and push API Docker image
+          id: build-and-push
+          uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+          with:
+            context: .
+            tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-api:${{ github.sha }}
+            labels: ${{ steps.meta.outputs.labels }}
+            push: true
 
       - name: Update container version
         uses: mikefarah/yq@master
