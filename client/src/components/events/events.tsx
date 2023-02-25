@@ -3,13 +3,13 @@ import "./events.scss";
 import { Button, Card, Descriptions } from 'antd';
 
 interface Event {
-    id: string;
     name: string;
     date: string;
     location: string;
-    description: string;
+    description: Array<string>;
     time: string;
     link: string;
+    num_people: number;
 }
 
 const Events: React.FC = () => {
@@ -27,7 +27,7 @@ const Events: React.FC = () => {
         <div className="events">
             <Card title="Upcoming Events">
                 {upcomingEvents.map(event => (
-                    <Card type="inner" title={event.name} className="event-card" bordered={false} extra={<Button type="primary" href={event.link}>Register</Button>} >
+                    <Card type="inner" title={event.name} className="event-card" bordered={false} extra={<Button type="primary" onClick={() => window.open(event.link, "_blank")}>Register</Button>} >
                         <Descriptions
                             title="Details"
                             bordered
@@ -35,8 +35,11 @@ const Events: React.FC = () => {
                         >
                             <Descriptions.Item label="Date">{event.date}</Descriptions.Item>
                             <Descriptions.Item label="Time">{event.time}</Descriptions.Item>
+                            <Descriptions.Item label="Max Number of People">{event.num_people}</Descriptions.Item>
                             <Descriptions.Item label="Location">{event.location}</Descriptions.Item>
-                            <Descriptions.Item label="Description">{event.description}</Descriptions.Item>
+                            <Descriptions.Item label="Description" style={{ whiteSpace: 'break-spaces' }}>
+                                {event.description.map(item => (item + "\n"))}
+                            </Descriptions.Item>
                         </Descriptions>
                     </Card>
                 ))}
