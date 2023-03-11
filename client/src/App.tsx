@@ -10,7 +10,7 @@ function App() {
         onAboutClick={() => console.log('About clicked')}
       />
       <EventsHome />
-    </div>
+    </div >
   );
 }
 
