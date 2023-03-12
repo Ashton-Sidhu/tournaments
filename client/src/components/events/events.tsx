@@ -13,7 +13,12 @@ interface Event {
     bracket: string;
 }
 
-const Events: React.FC = () => {
+interface EventProps {
+    eventType: string;
+}
+
+
+const Events: React.FC<EventProps> = ({ eventType }) => {
     const [events, setEvents] = useState<Event[]>([]);
     const [activeTabKey, setActiveTabKey] = useState<string>("details");
 
@@ -28,7 +33,11 @@ const Events: React.FC = () => {
             .then((data) => setEvents(data));
     }, []);
 
-    const upcomingEvents = events.filter(event => new Date(event.date) >= new Date());
+    if (eventType == "upcoming") {
+        const upcomingEvents = events.filter(event => new Date(event.date) > new Date());
+    } else {
+        const upcomingEvents = events.filter(event => new Date(event.date) <= new Date());
+    }
 
     const contentList: Record<string, Record<string, React.ReactNode>> = {};
 

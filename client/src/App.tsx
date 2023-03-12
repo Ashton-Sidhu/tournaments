@@ -9,7 +9,10 @@ function App() {
         onEventsClick={() => console.log('Events clicked')}
         onAboutClick={() => console.log('About clicked')}
       />
-      <EventsHome />
+      <h1>Upcoming Events</h1>
+      <EventsHome eventType="upcoming" />
+      <h1>Past Events</h1>
+      <EventsHome eventType="past" />
     </div >
   );
 }
